@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ShippingCalculator.BusinessLogicLayer.Concrete;
 using ShippingCalculator.CommonLayer.Logger.Concrete;
 
 namespace ShippingCalculator.WebUI
@@ -21,6 +22,7 @@ namespace ShippingCalculator.WebUI
         {
             services.AddControllersWithViews();
             services.AddSingleton<Logger>();
+            services.AddSingleton<GeoManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
