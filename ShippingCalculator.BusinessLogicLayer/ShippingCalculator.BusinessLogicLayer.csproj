@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Concrete\" />
+    <ProjectReference Include="..\ShippingCalculator.CommonLayer\ShippingCalculator.CommonLayer.csproj" />
+    <ProjectReference Include="..\ShippingCalculator.DataAccessLayer\ShippingCalculator.DataAccessLayer.csproj" />
   </ItemGroup>
 
 </Project>
