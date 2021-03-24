@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ShippingCalculator.BusinessLogicLayer\ShippingCalculator.BusinessLogicLayer.csproj" />
     <ProjectReference Include="..\ShippingCalculator.CommonLayer\ShippingCalculator.CommonLayer.csproj" />
   </ItemGroup>
 
