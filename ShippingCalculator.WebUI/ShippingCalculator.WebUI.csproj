@@ -7,11 +7,18 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.4" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ShippingCalculator.BusinessLogicLayer\ShippingCalculator.BusinessLogicLayer.csproj" />
     <ProjectReference Include="..\ShippingCalculator.CommonLayer\ShippingCalculator.CommonLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\AdminPanel\Data\" />
+    <Folder Include="Areas\AdminPanel\Models\" />
+    <Folder Include="Areas\AdminPanel\Views\" />
   </ItemGroup>
 
 </Project>
