@@ -1,7 +1,22 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@model ShippingCalculator.Entities.Concrete.Continent
+@{ 
+    <form asp-controller="Geo" asp-action="Index" method="post" class="form horizontal" role="form">
+        <div class="form-group">
+            <div class="row">
+                <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <label asp-for="Name" class="control-label" placeholder="Kıta"></label>
+                    <select asp-for="Id" class="form-control" asp-items="@(new SelectList(@ViewBag.ListOfContinent,"Id","Name"))" placeholder="Kıta Seçiniz"></select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                    <input id="Submit1" type="submit" value="submit" />
+                </div>
+            </div>
+        </div>
+    </form>
 }
-
-<h1>LOADİNG...</h1>
 
