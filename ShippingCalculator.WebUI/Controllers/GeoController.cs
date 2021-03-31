@@ -22,5 +22,20 @@ namespace ShippingCalculator.WebUI.Controllers
         {
             return View();
         }
+        public PartialViewResult GetCountriesDD(int id)
+        {
+            List<Country> countries = _manager.GetCountriesByContinentId(id);
+            return PartialView("GetCountriesDD",countries);
+        }
+        public PartialViewResult GetCitiesDD(string code)
+        {
+            List<City> cities = _manager.GetCitiesByCountryCode(code);
+            return PartialView("GetCitiesDD", cities);
+        }
+        public PartialViewResult GetCountiesDD(int id)
+        {
+            List<County> counties = _manager.GetCountiesByCityId(id);
+            return PartialView("GetCountiesDD", counties);
+        }
     }
 }

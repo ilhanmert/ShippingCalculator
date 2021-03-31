@@ -1,0 +1,17 @@
+﻿@model IEnumerable<ShippingCalculator.Entities.Concrete.Country>
+@if (Model != null && Model.Count() > 0)
+{
+    <label class="control-label">Ülke</label>
+    <select name="Country_Code"
+            class="form-control"
+            asp-items="@(new SelectList(Model,"Code","Name"))" onchange="getCities(this)"></select>
+}
+else
+{
+    <label class="control-label">Ülke</label>
+    <select name="Country_Code"
+            class="form-control"
+            >
+        <option>Ülke Bulunamadı</option>
+    </select>
+}
