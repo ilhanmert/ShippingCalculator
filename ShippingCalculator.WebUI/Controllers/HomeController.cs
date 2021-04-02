@@ -20,9 +20,5 @@ namespace ShippingCalculator.WebUI.Controllers
         {
             return View();
         }
-        public IActionResult Direct()
-        {
-            return View();
-        }
     }
 }

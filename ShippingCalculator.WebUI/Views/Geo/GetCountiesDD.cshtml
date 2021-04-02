@@ -7,11 +7,4 @@
             class="form-control"
             asp-items="@(new SelectList(Model,"Id","Name"))"></select>
 }
-else
-{
-    <label class="control-label">Şehir</label>
-    <select name="Counties_Id"
-            class="form-control">
-        <option>İlçe Bulunamadı</option>
-    </select>
-}
+            else { }

@@ -1,10 +1,36 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="card">
-    <div class="card-body">
-        <a href="/home/direct" class="btn btn-primary">Kullanıcı Girişi</a><br /><br />
-        <a href="https://localhost:44384/home/login" class="btn btn-primary">Admin Girişi</a>
+﻿@*@{
+        ViewData["Title"] = "Home Page";
+    }*@
+@*<div class="card">
+        <div class="card-body">
+            <a href="/geo/index" class="btn btn-primary">YURTİÇİ GÖNDERİ</a><br /><br />
+            <a href="/geo/index" class="btn btn-primary">YURTDIŞI GÖNDERİ</a>
+        </div>
+    </div>*@
+@*<div class="card text-center">
+        <div class="card-body">
+            <a href="/geo/index" class="btn btn-primary">YURTİÇİ GÖNDERİ</a>
+            <a href="/geo/index" class="btn btn-primary">YURTDIŞI GÖNDERİ</a>
+        </div>
+    </div>*@
+<style>
+        .container{ position: relative;}
+    </style>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <a href="/geo/index" class="btn btn-primary">YURTİÇİ GÖNDERİ</a>
+                <a href="/geo/index" class="btn btn-primary">YURTDIŞI GÖNDERİ</a>
+            </div>
+        </div>
     </div>
-</div>
+@*<div class="container h-100 d-flex justify-content-center">
+        <div class="jumbotron my-auto">
+            <div class="card">
+                <div class="card-body">
+                    <a href="/geo/index" class="btn btn-primary">YURTİÇİ GÖNDERİ</a>
+                    <a href="/geo/index" class="btn btn-primary">YURTDIŞI GÖNDERİ</a>
+                </div>
+            </div>
+        </div>
+    </div>*@

@@ -1,5 +1,3 @@
-using System;
-
 namespace ShippingCalculator.WebUI.Models
 {
     public class ErrorViewModel
