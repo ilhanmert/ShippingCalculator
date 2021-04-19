@@ -29,7 +29,7 @@ namespace ShippingCalculator.BusinessLogicLayer.Concrete
                 database = new Database(); // database nesnesi oluşturuluyor.
                 using (database)
                 {
-                    reader = database.Select("public", "shippingcompanies"); // database'de "public" şeması altında bulunan "shippingcompanies" fonksiyonundan, kargo şirketleri reader'a atılıyor. 
+                    reader = database.Select("cargo", "companies"); // database'de "cargo" şeması altında bulunan "companies" fonksiyonundan, kargo şirketleri reader'a atılıyor. 
                     if (reader!=null) // reader boş değil ise...
                     {
                         while (reader.Read()) // reader'da bulunan veriler shippingCompanies nesnesine ekleniyor.
@@ -61,7 +61,7 @@ namespace ShippingCalculator.BusinessLogicLayer.Concrete
             string json = string.Empty; // json adında boş string oluşturuluyor.
             using (database)
             {
-                json = database.SingleSelect("public", "shippingcompaniesjson").ToString(); // database'de "public" şeması altında bulunan "shippingcompaniesjson" fonksiyonundan, kargo şirketleri alınıyor ve string'e çevirilip json'a atılıyor.
+                json = database.SingleSelect("cargo", "companiesjson").ToString(); // database'de "cargo" şeması altında bulunan "companiesjson" fonksiyonundan, kargo şirketleri alınıyor ve string'e çevirilip json'a atılıyor.
             }
             return json; // json döndürülüyor.
         }
@@ -101,7 +101,7 @@ namespace ShippingCalculator.BusinessLogicLayer.Concrete
                     using (database)
                     {
                         database.AddParameter("_name", shippingCompany.Name); // girilen kargo şirketi ismi database'de bulunan _name değişkenine atanıyor.
-                        result = database.Insert("public", "shippingcompany"); // girilen kargo şirketi database'de "public" şeması altında bulunan "shippingcompany" fonksiyonuyla insert ediliyor.
+                        result = database.Insert("cargo", "company"); // girilen kargo şirketi database'de "cargo" şeması altında bulunan "company" fonksiyonuyla insert ediliyor.
                     }
                 }
                 else // kargo şirketi ismi boş girildiyse kullanıcıya hata mesajı gösteriliyor.
@@ -135,7 +135,7 @@ namespace ShippingCalculator.BusinessLogicLayer.Concrete
                     {
                         database.AddParameter("_id", shippingCompany.Id); // girilen ID database'de bulunan _id değişkenine atanıyor.
                         database.AddParameter("_name", shippingCompany.Name); // girilen kargo şirketi ismi database'de bulunan _name değişkenine atanıyor.
-                        result = database.Update("public", "shippingcompany"); // girilen kargo şirketi database'de "public" şeması altında bulunan "shippingcompany" fonksiyonuyla update ediliyor.
+                        result = database.Update("cargo", "company"); // girilen kargo şirketi database'de "cargo" şeması altında bulunan "company" fonksiyonuyla update ediliyor.
                     }
                 }
                 else // ID sıfırdan küçük, boş girildiyse veya kargo şirketi adı boş girildiyse kullanıcıya hata mesajı gösteriliyor.
@@ -168,7 +168,7 @@ namespace ShippingCalculator.BusinessLogicLayer.Concrete
                     using (database)
                     {
                         database.AddParameter("_id", shippingCompany.Id); // girilen ID database'de bulunan _id değişkenine atanıyor.
-                        result = database.Delete("public", "shippingcompany"); // girilen kargo şirketi database'de "public" şeması altında bulunan "shippingcompany" fonksiyonuyla delete ediliyor.
+                        result = database.Delete("cargo", "company"); // girilen kargo şirketi database'de "cargo" şeması altında bulunan "company" fonksiyonuyla delete ediliyor.
                     }
                 }
                 else // ID sıfırdan küçük veya boş girildiyse kullanıcıya hata mesajı gösteriliyor.
