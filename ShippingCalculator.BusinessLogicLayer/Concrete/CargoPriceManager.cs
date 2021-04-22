@@ -1,9 +1,10 @@
 ﻿using ShippingCalculator.CommonLayer.Logger.Concrete;
+using ShippingCalculator.Entities.Concrete;
 using System;
 
 namespace ShippingCalculator.BusinessLogicLayer.Concrete
 {
-    class CargoPriceManager
+    public class CargoPriceManager
     {
         private readonly Logger logger;
         public CargoPriceManager(Logger _logger)
@@ -69,6 +70,25 @@ namespace ShippingCalculator.BusinessLogicLayer.Concrete
             result = Math.Pow(1.082, (desi - 1)); // girilen desiye işlem uygulanıyor ve result'a atanıyor.
             result = (result * 2.82) * 11.43; // işleme devam edilip yeni değer result'a atanıyor.
             return result; // result döndürülüyor.
+        }
+        /// <summary>
+        /// Desi Hesaplayan Fonksiyon
+        /// </summary>
+        /// <param name="package">koli bilgileri</param>
+        /// <returns></returns>
+        public int DesiCalculator(Package package)
+        {
+            double desi; // double tipinde desi değişkeni tanımlanıyor.
+            desi = (package.Height * package.Length * package.Width)/3000; // standartlara uygun desi hesaplanıyor.
+            if (desi > package.Weight) // desi, koli ağırlığından fazla ise...
+            {
+
+                return Convert.ToInt32(desi); // int tipinde desi döndürülüyor.
+            }
+            else // koli ağırlığı, desiden büyük ise...
+            {
+                return Convert.ToInt32(package.Weight); // int tipinde koli ağırlık döndürülüyor.
+            }
         }
     }
 }
