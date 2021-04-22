@@ -1,13 +1,10 @@
-﻿using ShippingCalculator.CommonLayer.Logger.Concrete;
+﻿using Npgsql;
+using ShippingCalculator.CommonLayer.Logger.Concrete;
 using ShippingCalculator.DataAccessLayer.PostgreSQL;
-using Npgsql;
 using ShippingCalculator.Entities.Concrete;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
-using System.Net;
-using System.IO;
-using System.Xml;
 
 namespace ShippingCalculator.BusinessLogicLayer.Concrete
 {
@@ -488,32 +485,6 @@ namespace ShippingCalculator.BusinessLogicLayer.Concrete
                 logger.CreateLog(ex.Message);
             }
             return counties; // işlemler bittikten sonra counties nesnesi döndürülüyor.
-        }
-        public double GetDrivingDistanceInKilometers(string origin, string destination)
-        {
-            string url = @"http://maps.googleapis.com/maps/api/distancematrix/xml?origins=" +
-              origin + "&destinations=" + destination +
-              "&mode=driving&sensor=false&language=en-EN&units=imperial";
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            WebResponse response = request.GetResponse();
-            Stream dataStream = response.GetResponseStream();
-            StreamReader sreader = new StreamReader(dataStream);
-            string responsereader = sreader.ReadToEnd();
-            response.Close();
-
-            XmlDocument xmldoc = new XmlDocument();
-            xmldoc.LoadXml(responsereader);
-
-
-            if (xmldoc.GetElementsByTagName("status")[0].ChildNodes[0].InnerText == "OK")
-            {
-                XmlNodeList distance = xmldoc.GetElementsByTagName("distance");
-                //distance = 1.609344 * distance;
-                return Convert.ToDouble(distance[0].ChildNodes[1].InnerText.Replace(" km", ""));
-            }
-
-            return 0;
         }
     }
 }
