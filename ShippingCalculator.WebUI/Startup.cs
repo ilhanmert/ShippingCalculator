@@ -24,6 +24,8 @@ namespace ShippingCalculator.WebUI
             services.AddSingleton<Logger>();
             services.AddSingleton<GeoManager>();
             services.AddSingleton<CargoPriceManager>();
+            services.AddSingleton<ShippingCompanyManager>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

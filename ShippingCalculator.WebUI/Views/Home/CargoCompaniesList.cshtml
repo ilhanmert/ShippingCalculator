@@ -1,0 +1,23 @@
+﻿@model IEnumerable<ShippingCalculator.Entities.Concrete.ShippingCompany>
+
+@if (Model != null && Model.Count() > 0)
+{
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var company in Model)
+            {
+                <tr>
+                    <td>@company.Id</td>
+                    <td>@company.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
