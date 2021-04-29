@@ -1,14 +1,79 @@
-﻿@*@{
-        ViewData["Title"] = "Home Page";
-    }*@
-<style>
-        .container{ position: relative;}
-    </style>
-    <div class="container">
-        <div class="card">
-            <div class="card-body">
-                <a href="/home/main" class="btn btn-primary">YURTİÇİ GÖNDERİ</a>
-                <a href="/home/main" class="btn btn-primary">YURTDIŞI GÖNDERİ</a>
+﻿<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://npmcdn.com/leaflet-geometryutil"></script>
+<style type="text/css">
+    .container {
+        width: 95%;
+        max-width: 980px;
+        padding: 1% 2%;
+        margin: 0 auto
+    }
+
+    #map {
+        width: 100%;
+        height: 50%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .address {
+        cursor: pointer
+    }
+
+        .address:hover {
+            color: #AA0000;
+            text-decoration: underline
+        }
+</style>
+<div class="container">
+    <div id="map" style="height: 300px"></div><br />
+    <input type="hidden" id="distance">
+    <div class="col-md-12 row">
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <input class="form-control" type="text" name="delivery" id="delivery" onkeyup="getAddresses('delivery','delivery_result')" placeholder="NEREDEN" />
             </div>
+            <div id="delivery_result"></div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <input class="form-control" type="text" name="nereye" id="nereye" onkeyup="getAddresses('nereye','nereye_result')" placeholder="NEREYE" />
+            </div>
+            <div id="nereye_result"></div>
         </div>
     </div>
+    <div>
+        <div class="d-none" id="shipperaddress_container">
+            <label>Gönderici Adres</label>
+            <input type="text" name="shipperaddress" id="shipperaddress" />
+        </div>
+        <div class="d-none" id="deliveryaddress_container">
+            <label>Teslimat Adresi</label>
+            <input type="text" name="deliveryaddress" id="deliveryaddress" />
+        </div>
+    </div>
+    <br />
+    <div>
+        <button class="btn btn-success" onclick="getPackageDelivery();">PAKET / KOLİ GÖNDERİMİ</button>
+        <button class="btn btn-success" onclick="documentPriceCalculate();">DOSYA / ZARF GÖNDERİMİ</button>
+    </div>
+    <br />
+    <div class="d-none" id="package_delivery_container">
+        <div class="form-group">
+            <form id="desi_form">
+                <input type="number" name="Width" id="width" placeholder="En(cm)" /><br /><br />
+                <input type="number" name="Length" id="length" placeholder="Boy(cm)" /><br /><br />
+                <input type="number" name="Height" id="height" placeholder="Yükseklik(cm)" /><br /><br />
+                <input type="number" name="Weight" id="weigth" placeholder="Ağırlık(kg)" /><br /><br />
+            </form>
+            <button class="btn btn-success" onclick="packagePriceCalculate();">Hesapla</button>
+            <button class="btn btn-success" onclick="addNewPackage();">Paket/Koli Ekle</button>
+        </div>
+    </div>
+    <div class="d-none" id="price_result_container">
+        <input type="text" id="price_result" />
+    </div>
+    <div id="cargo_companies_container"></div>
+</div>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/Home/home.js"></script>
