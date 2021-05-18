@@ -61,13 +61,13 @@
     <div class="d-none" id="package_delivery_container">
         <div class="form-group">
             <form id="desi_form">
-                <input type="number" name="Width" id="width" placeholder="En(cm)" /><br /><br />
-                <input type="number" name="Length" id="length" placeholder="Boy(cm)" /><br /><br />
-                <input type="number" name="Height" id="height" placeholder="Yükseklik(cm)" /><br /><br />
-                <input type="number" name="Weight" id="weigth" placeholder="Ağırlık(kg)" /><br /><br />
+                <input type="number" name="Width" id="width" class="form-control package_width" placeholder="En(cm)" /><br /><br />
+                <input type="number" name="Length" id="length" class="form-control package_length" placeholder="Boy(cm)" /><br /><br />
+                <input type="number" name="Height" id="height" class="form-control package_height" placeholder="Yükseklik(cm)" /><br /><br />
+                <input type="number" name="Weight" id="weight" class="form-control package_weight" placeholder="Ağırlık(kg)" /><br /><br />
             </form>
-            <button class="btn btn-success" onclick="packagePriceCalculate();">Hesapla</button>
             <button class="btn btn-success" onclick="addNewPackage();">Paket/Koli Ekle</button>
+            <button class="btn btn-success" onclick="packagePriceCalculate();">Hesapla</button>
         </div>
     </div>
     <div class="d-none" id="price_result_container">

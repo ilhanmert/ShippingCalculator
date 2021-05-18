@@ -1,12 +1,16 @@
 ﻿@model IEnumerable<ShippingCalculator.Entities.Concrete.Package>
 <div class="form-group">
     <form id="desi_form">
-        <input type="number" name="Width" id="width" placeholder="En(cm)" /><br /><br />
-        <input type="number" name="Length" id="length" placeholder="Boy(cm)" /><br /><br />
-        <input type="number" name="Height" id="height" placeholder="Yükseklik(cm)" /><br /><br />
-        <input type="number" name="Weight" id="weigth" placeholder="Ağırlık(kg)" /><br /><br />
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <h5>KOLİ @(i+1)</h5>
+            <hr />
+            <input type="number" name="Width" class="form-control package_width" placeholder="En(cm)" @if (Model.ElementAt(i).Width > 0) { <text> value="@Model.ElementAt(i).Width" </text> } /><br /><br />
+            <input type="number" name="Length" class="form-control package_length" placeholder="Boy(cm)" @if (Model.ElementAt(i).Length > 0) { <text> value="@Model.ElementAt(i).Length" </text> } /><br /><br />
+            <input type="number" name="Height" class="form-control package_height" placeholder="Yükseklik(cm)" @if (Model.ElementAt(i).Height > 0) { <text> value="@Model.ElementAt(i).Height" </text> } /><br /><br />
+            <input type="number" name="Weight" class="form-control package_weight" placeholder="Ağırlık(kg)" @if (Model.ElementAt(i).Weight > 0) { <text> value="@Model.ElementAt(i).Weight" </text> } /><br /><br />
+        }
     </form>
     <button class="btn btn-success" onclick="packagePriceCalculate();">Hesapla</button>
     <button class="btn btn-success" onclick="addNewPackage();">Paket/Koli Ekle</button>
 </div>
-<script src="~/js/Home/home.js"></script>
