@@ -26,58 +26,72 @@ namespace ShippingCalculator.WebUI.Controllers
             return View();
         }
         [HttpPost]
-        public decimal PackageCalculate(int distance, Package package)
+        public PartialViewResult PackageCalculate(int distance, List<Package> packages)
         {
-            int desi = _cargoPriceManager.DesiCalculator(package);
-            decimal price;
-            if (distance <= 1)
+            List<ShippingCompany> shippingCompanies = _shippingCompanyManager.GetShippingCompaniesJsonList();
+            List<decimal> prices = new List<decimal>();
+            int desi;
+            int toplamdesi = 0;
+            foreach (var item in packages)
             {
-                price = _cargoPriceManager.LocalPriceCalculator(desi);
+                desi = _cargoPriceManager.DesiCalculator(item);
+                toplamdesi = toplamdesi + desi;
             }
-            else if (distance <= 200 && distance > 1)
+            foreach (var item in shippingCompanies)
             {
-                price = _cargoPriceManager.ClosePriceCalculator(desi);
+                if (distance <= 1)
+                {
+                    prices.Add(item.Price = _cargoPriceManager.LocalPriceCalculator(toplamdesi, item.LocalFactor));
+                }
+                else if (distance <= 200 && distance > 1)
+                {
+                    prices.Add(item.Price = _cargoPriceManager.ClosePriceCalculator(toplamdesi, item.CloseFactor));
+                }
+                else if (distance <= 600 && distance > 200)
+                {
+                    prices.Add(item.Price = _cargoPriceManager.ShortPriceCalculator(toplamdesi, item.ShortFactor));
+                }
+                else if (distance <= 1000 && distance > 600)
+                {
+                    prices.Add(item.Price = _cargoPriceManager.MidlinePriceCalculator(toplamdesi, item.MiddleFactor));
+                }
+                else
+                {
+                    prices.Add(item.Price = _cargoPriceManager.LongPriceCalculator(toplamdesi, item.LongFactor));
+                }
             }
-            else if (distance <= 600 && distance > 200)
-            {
-                price = _cargoPriceManager.ShortPriceCalculator(desi);
-            }
-            else if (distance <= 1000 && distance > 600)
-            {
-                price = _cargoPriceManager.MidlinePriceCalculator(desi);
-            }
-            else
-            {
-                price = _cargoPriceManager.LongPriceCalculator(desi);
-            }
-            return price;
+            return PartialView("CargoCompaniesList", shippingCompanies);
         }
         [HttpPost]
-        public decimal DocumentCalculate(int distance)
+        public PartialViewResult DocumentCalculate(int distance)
         {
+            List<ShippingCompany> shippingCompanies = _shippingCompanyManager.GetShippingCompaniesJsonList();
+            List<decimal> prices = new List<decimal>();
             int desi = 1;
-            decimal price;
-            if (distance <= 1)
+            foreach (var item in shippingCompanies)
             {
-                price = _cargoPriceManager.LocalPriceCalculator(desi);
+                if (distance <= 1)
+                {
+                    prices.Add(item.Price = _cargoPriceManager.LocalPriceCalculator(desi, item.LocalFactor));
+                }
+                else if (distance <= 200 && distance > 1)
+                {
+                    prices.Add(item.Price = _cargoPriceManager.ClosePriceCalculator(desi, item.CloseFactor));
+                }
+                else if (distance <= 600 && distance > 200)
+                {
+                    prices.Add(item.Price = _cargoPriceManager.ShortPriceCalculator(desi, item.ShortFactor));
+                }
+                else if (distance <= 1000 && distance > 600)
+                {
+                    prices.Add(item.Price = _cargoPriceManager.MidlinePriceCalculator(desi, item.MiddleFactor));
+                }
+                else
+                {
+                    prices.Add(item.Price = _cargoPriceManager.LongPriceCalculator(desi, item.LongFactor));
+                }
             }
-            else if (distance > 1 && distance <= 200)
-            {
-                price = _cargoPriceManager.ClosePriceCalculator(desi);
-            }
-            else if (distance > 200 && distance <= 600)
-            {
-                price = _cargoPriceManager.ShortPriceCalculator(desi);
-            }
-            else if (distance > 600 && distance <= 1000)
-            {
-                price = _cargoPriceManager.MidlinePriceCalculator(desi);
-            }
-            else
-            {
-                price = _cargoPriceManager.LongPriceCalculator(desi);
-            }
-            return price;
+            return PartialView("CargoCompaniesList", shippingCompanies);
         }
         public PartialViewResult CargoCompaniesList()
         {
@@ -91,7 +105,14 @@ namespace ShippingCalculator.WebUI.Controllers
         [HttpPost]
         public PartialViewResult GenerateNewPackage(List<Package> packages)
         {
+            Package p = new Package();
+            packages.Add(p);
             return PartialView("GenerateNewPackage", packages);
+        }
+        public decimal GetCargoFactors()
+        {
+            decimal result = 0;
+            return result;
         }
     }
 }
