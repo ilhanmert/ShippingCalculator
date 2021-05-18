@@ -1,6 +1,7 @@
 ﻿using ShippingCalculator.CommonLayer.Logger.Concrete;
 using ShippingCalculator.Entities.Concrete;
 using System;
+using System.Collections.Generic;
 
 namespace ShippingCalculator.BusinessLogicLayer.Concrete
 {
@@ -15,60 +16,65 @@ namespace ShippingCalculator.BusinessLogicLayer.Concrete
         /// Şehiriçi Mesafeler İçin Ücret Hesaplayan Fonksiyon
         /// </summary>
         /// <param name="desi">desi</param>
+        /// <param name="factor">katsayı</param>
         /// <returns></returns>
-        public decimal LocalPriceCalculator(int desi)
+        public decimal LocalPriceCalculator(int desi, decimal factor)
         {
             double result; // double tipinde result tanımlanıyor.
             result = Math.Pow(1.082, (desi - 1)); // girilen desiye işlem uygulanıyor ve result'a atanıyor.
-            result = (result * 1.45) * 11.43; // işleme devam edilip yeni değer result'a atanıyor.
+            result = (result * Convert.ToDouble(factor)) * 11.43; // işleme devam edilip yeni değer result'a atanıyor.
             return decimal.Round(Convert.ToDecimal(result), 2); // result döndürülüyor.
         }
         /// <summary>
         /// Yakın Mesafeler İçin Ücret Hesaplayan Fonksiyon
         /// </summary>
         /// <param name="desi">desi</param>
+        /// <param name="factor">katsayı</param>
         /// <returns></returns>
-        public decimal ClosePriceCalculator(int desi)
+        public decimal ClosePriceCalculator(int desi, decimal factor)
         {
             double result; // double tipinde result değişkeni tanımlanıyor.
             result = Math.Pow(1.082, (desi - 1)); // girilen desiye işlem uygulanıyor ve result'a atanıyor.
-            result = (result * 2.15) * 11.43; // işleme devam edilip yeni değer result'a atanıyor.
+            result = (result * Convert.ToDouble(factor)) * 11.43; // işleme devam edilip yeni değer result'a atanıyor.
             return decimal.Round(Convert.ToDecimal(result), 2); // result döndürülüyor.
         }
         /// <summary>
         /// Kısa Mesafeler İçin Ücret Hesaplayan Fonksiyon
         /// </summary>
         /// <param name="desi">desi</param>
+        /// <param name="factor">katsayı</param>
         /// <returns></returns>
-        public decimal ShortPriceCalculator(int desi)
+        public decimal ShortPriceCalculator(int desi, decimal factor)
         {
             double result; // double tipinde result değişkeni tanımlanıyor.
             result = Math.Pow(1.082, (desi - 1)); // girilen desiye işlem uygulanıyor ve result'a atanıyor.
-            result = (result * 2.33) * 11.43; // işleme devam edilip yeni değer result'a atanıyor.
+            result = (result * Convert.ToDouble(factor)) * 11.43; // işleme devam edilip yeni değer result'a atanıyor.
             return  decimal.Round(Convert.ToDecimal(result),2); // result döndürülüyor.
         }
         /// <summary>
         /// Orta Mesafeler İçin Ücret Hesaplayan Fonksiyon
         /// </summary>
         /// <param name="desi">desi</param>
+        /// <param name="factor">katsayı</param>
         /// <returns></returns>
-        public decimal MidlinePriceCalculator(int desi)
+        public decimal MidlinePriceCalculator(int desi, decimal factor)
         {
             double result; // double tipinde result değişkeni oluşturuluyor.
             result = Math.Pow(1.082, (desi - 1)); // girilen desiye işlem uygulanıyor ve result'a atanıyor.
-            result = (result * 2.56) * 11.43; // işleme devam edilip yeni değer result'a atanıyor.
+            result = (result * Convert.ToDouble(factor)) * 11.43; // işleme devam edilip yeni değer result'a atanıyor.
             return decimal.Round(Convert.ToDecimal(result), 2); // result döndürülüyor.
         }
         /// <summary>
         /// Uzun Mesafeler İçin Ücret Hesaplayan Fonksiyon
         /// </summary>
         /// <param name="desi">desi</param>
+        /// <param name="factor">katsayı</param>
         /// <returns></returns>
-        public decimal LongPriceCalculator(int desi)
+        public decimal LongPriceCalculator(int desi, decimal factor)
         {
             double result; // double tipinde result değişkeni oluşturuluyor.
             result = Math.Pow(1.082, (desi - 1)); // girilen desiye işlem uygulanıyor ve result'a atanıyor.
-            result = (result * 2.82) * 11.43; // işleme devam edilip yeni değer result'a atanıyor.
+            result = (result * Convert.ToDouble(factor)) * 11.43; // işleme devam edilip yeni değer result'a atanıyor.
             return decimal.Round(Convert.ToDecimal(result), 2); // result döndürülüyor.
         }
         /// <summary>
