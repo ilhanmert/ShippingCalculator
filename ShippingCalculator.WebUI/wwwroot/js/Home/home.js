@@ -97,18 +97,25 @@ function packagePriceCalculate() {
         });
         return;
     }
-    var _package = {}; //package nesnesi
-    $('#desi_form').serializeArray().map(function (x) { _package[x.name] = x.value; }); //desiformdaki inputları package nesnesine cevirir.
-    if (_package != null) {
+    var packages = getPackages();
+    Swal.fire({
+        title: 'Hesaplanıyor...',
+        html: 'Bu işlem <strong>bir kaç dakika </strong> sürebilir. Lütfen bekleyin...',// add html attribute if you want or remove
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
+    if (packages != null) {
         $.ajax({
             method: "POST",
             url: "Home/PackageCalculate",
-            data: { distance: _distance, package: _package },
+            data: { distance: _distance, packages: packages },
         }).done(function (result) {
 
             //istek basarili ise burasi calisir
-            $('#price_result').val(result + " ₺");
-            $('#price_result_container').removeClass('d-none');
+            $('#cargo_companies_container').html(result);
 
         }).fail(function (result) {
             //istek basarisiz ise burasi calisir.
@@ -135,6 +142,15 @@ function documentPriceCalculate() {
         });
         return;
     }
+    Swal.fire({
+        title: 'Hesaplanıyor...',
+        html: 'Bu işlem <strong>bir kaç dakika </strong> sürebilir. Lütfen bekleyin...',// add html attribute if you want or remove
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        onBeforeOpen: () => {
+            Swal.showLoading()
+        },
+    });
     $.ajax({
         method: "POST",
         url: "Home/DocumentCalculate",
@@ -145,8 +161,7 @@ function documentPriceCalculate() {
             confirmButtonText: 'Tamam',
         });
         //istek basarili ise burasi calisir
-        $('#price_result').val(result + " ₺");
-        $('#price_result_container').removeClass('d-none');
+        $('#cargo_companies_container').html(result);
 
     }).fail(function (result) {
         //istek basarisiz ise burasi calisir.
@@ -160,13 +175,13 @@ function getPackageDelivery() {
 }
 
 function addNewPackage() {
-    var package = {}; //package nesnesi
-    $('#desi_form').serializeArray().map(function (x) { package[x.name] = x.value; }); //desiformdaki inputları package nesnesine cevirir.
+    var packages = getPackages();
+    //$('#desi_form').serializeArray().map(function (x) { package[x.name] = x.value; }); //desiformdaki inputları package nesnesine cevirir.
     $.ajax({
         type: 'POST',
         dataType: 'html',
         url: 'Home/GenerateNewPackage',
-        data: { package: package },
+        data: { packages: packages},
     }).done(function (result) {
         $('#package_delivery_container').html(result);
     }).fail(function (result) {
@@ -180,6 +195,32 @@ function addNewPackage() {
             confirmButtonText: 'Tamam'
         });
     });
+}
+
+function getPackages() {
+    var packages = [];
+    var package_width = $(".package_width").map(function () {
+        return this.value;
+    }).get();
+    var package_length = $(".package_length").map(function () {
+        return this.value;
+    }).get();
+    var package_height = $(".package_height").map(function () {
+        return this.value;
+    }).get();
+    var package_weight = $(".package_weight").map(function () {
+        return this.value;
+    }).get();
+    for (var i = 0; i < package_width.length; i++) {
+
+        var package = {}; //package nesnesi
+        package.Width = parseFloat(package_width[i]);
+        package.Length = parseFloat(package_length[i]);
+        package.Height = parseFloat(package_height[i]);
+        package.Weight = parseFloat(package_weight[i]);
+        packages.push(package);
+    }
+    return packages;
 }
 
 function htmlContentExample() {
