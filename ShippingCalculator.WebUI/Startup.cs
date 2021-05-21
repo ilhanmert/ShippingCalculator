@@ -22,7 +22,6 @@ namespace ShippingCalculator.WebUI
         {
             services.AddControllersWithViews();
             services.AddSingleton<Logger>();
-            services.AddSingleton<GeoManager>();
             services.AddSingleton<CargoPriceManager>();
             services.AddSingleton<ShippingCompanyManager>();
 

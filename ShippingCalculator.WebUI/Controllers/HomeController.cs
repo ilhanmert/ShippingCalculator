@@ -109,10 +109,5 @@ namespace ShippingCalculator.WebUI.Controllers
             packages.Add(p);
             return PartialView("GenerateNewPackage", packages);
         }
-        public decimal GetCargoFactors()
-        {
-            decimal result = 0;
-            return result;
-        }
     }
 }
