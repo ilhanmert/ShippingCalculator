@@ -116,7 +116,7 @@ function packagePriceCalculate() {
 
             //istek basarili ise burasi calisir
             $('#cargo_companies_container').html(result);
-
+            Swal.close();
         }).fail(function (result) {
             //istek basarisiz ise burasi calisir.
             console.log(result);
@@ -222,102 +222,3 @@ function getPackages() {
     }
     return packages;
 }
-
-function htmlContentExample() {
-    Swal.fire({
-        title: 'Hesaplanıyor...',
-        html: 'Bu işlem <strong>bir kaç dakika </strong> sürebilir. Lütfen bekleyin...',// add html attribute if you want or remove
-        allowOutsideClick: false,
-        showConfirmButton: false,
-        onBeforeOpen: () => {
-            Swal.showLoading()
-        },
-    });
-    $.ajax({
-        method: "GET",
-        url: "Home/CargoCompaniesList",
-    }).done(function (result) {
-        $('#cargo_companies_container').html(result);
-        Swal.close();
-    }).fail(function (result) {
-        //istek basarisiz ise burasi calisir.
-        console.log(result);
-        console.log(Object.keys(result));
-        Swal.fire({
-            icon: 'error',
-            title: "Hata",
-            html: 'Beklenmedik Bir Hata Oluştu',
-            confirmButtonText: 'Tamam'
-        });
-    });
-}
-
-/*var inp = document.getElementById("searchbar");*/
-
-//_map.on('click', function (e) {
-//    var txtaddress = $('#searchbar').val();
-//    if (!_firstLatLng) {
-//        _firstLatLng = e.latlng;
-//        _firstPoint = e.layerPoint;
-//        L.marker(_firstLatLng).addTo(_map);
-//        $('#shipperaddress').val(txtaddress);
-//        $('#shipperaddress_container').removeClass('d-none');
-//    } else {
-//        _secondLatLng = e.latlng;
-//        _secondPoint = e.layerPoint;
-//        L.marker(_secondLatLng).addTo(_map);
-//        $('#deliveryaddress').val(txtaddress);
-//        $('#deliveryaddress_container').removeClass('d-none');
-//    }
-
-//    if (_firstLatLng && _secondLatLng) {
-//        L.polyline([_firstLatLng, _secondLatLng], {
-//            color: 'red'
-//        }).addTo(_map);
-
-//        var markerFrom = L.circleMarker(_firstLatLng, { color: "#F00", radius: 10 });
-//        var markerTo = L.circleMarker(_secondLatLng, { color: "#4AFF00", radius: 10 });
-//        var from = markerFrom.getLatLng();
-//        var to = markerTo.getLatLng();
-//        markerFrom.bindPopup((from).toString());
-//        markerTo.bindPopup((to).toString());
-//        _map.addLayer(markerTo);
-//        _map.addLayer(markerFrom);
-//        getDistance(from, to);
-//    }
-//})
-
-//function chooseAddr(lat1, lng1) {
-//    var czoom = _map.getZoom();
-//    if (czoom < 18) { nzoom = czoom + 16; }
-//    if (nzoom > 18) { nzoom = 18; }
-//    if (czoom != 18) { _map.setView([lat1, lng1], nzoom); } else { _map.setView([lat1, lng1]); }
-//}
-
-//function myFunction(arr) {
-//    var out = "<br />";
-//    var i;
-
-//    if (arr.length > 0) {
-//        for (i = 0; i < arr.length; i++) {
-//            out += "<div class='address' title='Adresi Göster' onclick='chooseAddr(" + arr[i].lat + ", " + arr[i].lon + ");return false;'>" + arr[i].display_name + "</div>";
-//        }
-//        document.getElementById('results').innerHTML = out;
-//    }
-//    else {
-//        document.getElementById('results').innerHTML = "Adres Bulunamadı...";
-//    }
-
-//}
-//inp.addEventListener('keyup', function addr_search() {
-//    var xmlhttp = new XMLHttpRequest();
-//    var url = "https://nominatim.openstreetmap.org/search?format=json&limit=3&q=" + inp.value;
-//    xmlhttp.onreadystatechange = function () {
-//        if (this.readyState == 4 && this.status == 200) {
-//            var myArr = JSON.parse(this.responseText);
-//            myFunction(myArr);
-//        }
-//    };
-//    xmlhttp.open("GET", url, true);
-//    xmlhttp.send();
-//});
